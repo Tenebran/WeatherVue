@@ -1,164 +1,114 @@
 <script lang="ts">
 import { v1 } from 'uuid';
-import { defineComponent } from 'vue';
+import { defineComponent, Ref, ref, watch } from 'vue';
 import User from './components/User.vue';
 
 export type userData = { name: string; email: string; password: string; id: string };
 
 export default defineComponent({
-  components: { User },
-  data(this: { info: string; subtitle: string }) {
-    return {
-      users: [] as userData[],
-      userName: '',
-      userPassword: '',
-      userEmail: '',
-      error: '',
-    };
-  },
-  methods: {
-    sendData() {
-      if (!this.userName) {
-        this.error = 'user name required';
-        return;
-      } else if (!this.userEmail) {
-        this.error = 'user email required';
-        return;
-      } else if (!this.userPassword) {
-        this.error = 'user Password required';
-        return;
+  setup() {
+    const city = ref(localStorage.getItem('city') || '');
+    let errorMessage: Ref<string, string> = ref('');
+
+    watch(
+      city,
+      (newValue: string) => {
+        localStorage.setItem('city', newValue);
+        newValue.length >= 2 ? (errorMessage.value = '') : '';
+      },
+      { immediate: true }
+    );
+
+    const getWeather = () => {
+      if (city.value.trim().length < 2) {
+        errorMessage.value = 'The name must be at least 2 characters long.';
+        console.log('hello', errorMessage);
       }
+    };
 
-      this.users.push({
-        name: this.userName,
-        email: this.userEmail,
-        password: this.userPassword,
-        id: v1(),
-      });
+    const handleSearch = () => {
+      console.log(`Searching weather for:`);
+    };
 
-      this.error = '';
-      this.userName = '';
-      this.userPassword = '';
-      this.userEmail = '';
-    },
-    deletUser(id: string) {
-      this.users = this.users.filter((el) => el.id !== id);
-    },
+    return {
+      city,
+      errorMessage,
+      handleSearch,
+      getWeather,
+    };
   },
 });
 </script>
 
 <template>
-  <v-card color="grey-lighten-4" height="70px" rounded="0" flat>
-    <v-toolbar density="compact">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Title</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-    </v-toolbar>
-  </v-card>
-
-  <v-container class="content-container">
-    <v-sheet class="bg-deep-purple pa-12" rounded>
-      <v-card class="mx-auto px-6 py-8" max-width="344">
-        <v-text-field
-          v-model="userEmail"
-          class="mb-2"
-          label="Email"
-          :error="!userEmail && !!error"
-          :errorMessages="!userEmail ? error : ''"
-          clearable></v-text-field>
-
-        <v-text-field
-          v-model="userName"
-          class="mb-2"
-          label="Name"
-          :error="!userName && !!error"
-          :errorMessages="!userName ? error : ''"
-          clearable></v-text-field>
-
-        <v-text-field
-          v-model="userPassword"
-          label="Password"
-          placeholder="Enter your password"
-          :error="!userPassword && !!error"
-          :errorMessages="!userPassword ? error : ''"
-          clearable></v-text-field>
-
-        <br />
-
-        <v-btn color="success" size="large" @click="sendData()" variant="elevated" block>
-          send
-        </v-btn>
-      </v-card>
-    </v-sheet>
-
+  <v-container class="fill-height d-flex justify-center align-center no-gutters" fluid>
     <v-card
-      v-if="users.length === 0"
-      :variant="'elevated'"
-      class="card"
-      color="surface-variant"
-      max-width="344"
-      title="You hav no Users">
-    </v-card>
+      class="weather_wrapper"
+      prepend-icon="$vuetify"
+      prepend-icon-color="primary"
+      theme="dark"
+      width="100%">
+      <template v-slot:title>
+        <span class="weather_font">Welcome to WeatherVue</span>
+      </template>
+      <template v-slot:subtitle>
+        <span
+          >Discover the current weather in
+          <span class="weather_font_subtitle"> {{ city ? city : 'you City' }}</span></span
+        >
+      </template>
 
-    <v-card
-      v-if="!!users.length"
-      :variant="'elevated'"
-      class="card"
-      color="surface-variant"
-      max-width="344"
-      :title="`You hav ${users.length} Users`">
-    </v-card>
-
-    <User v-for="user in users" :key="user.id" :user="user" :deletUser="deletUser" />
-  </v-container>
+      <v-responsive class="mx-auto weather_textfield" max-width="344">
+        <v-text-field
+          label="City"
+          variant="solo"
+          :append-inner-icon="city.length > 0 ? 'mdi-magnify' : ''"
+          :error="errorMessage.length > 1"
+          :error-messages="errorMessage"
+          v-model="city"
+          :disabled::append-inner="city.length <= 0"
+          @click:append-inner="getWeather"></v-text-field>
+      </v-responsive> </v-card
+  ></v-container>
 </template>
 
 <style lang="scss" scoped>
-$primary-color: green;
+.weather {
+  &_wrapper {
+    box-sizing: border-box;
+    margin: 0;
+    height: 500px;
+    min-width: 50vw;
+    padding: 20px 0;
+    border-radius: 20px;
+    background: vars.$vue-blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-input {
-  display: block;
-  margin-bottom: 20px;
-}
-.userInput {
-  font-size: 25px;
-  display: block;
-  margin: 10px 20px;
-}
-.userInputData {
-  font-size: 23px;
-  color: $primary-color;
-}
-.error {
-  color: red;
-  font-size: 18px;
-}
-
-.my-class {
-  color: $primary-color;
+  &_font {
+    color: vars.$vue-green;
+    &_subtitle {
+      color: vars.$vue-green;
+      font-weight: 900;
+      font-size: 18px;
+      display: block;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  &_textfield {
+    width: 30vw;
+  }
+  &_body {
+    margin: 0 40px;
+  }
 }
 
-.content-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px;
-}
-.card {
-  margin: 20px 0;
+.container {
+  height: 100%;
 }
 </style>
