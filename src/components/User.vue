@@ -6,9 +6,11 @@ export default defineComponent({
   props: {
     user: {
       type: Object as PropType<userData>,
+      required: true,
     },
     deletUser: {
       type: Function,
+      required: true,
     },
   },
   data() {
@@ -18,21 +20,21 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="userInput">
-    <span class="userInputData">{{ user.name }}</span>
-  </div>
-  <div class="userInput">
-    <span class="userInputData">{{ user.email }}</span>
-  </div>
-  <div class="userInput">
-    <span class="userInputData">{{ user.password }}</span>
-  </div>
-  <button class="deleteUserButton" @click="deletUser(user.id)">Delete User</button>
+  <v-card
+    :variant="'elevated'"
+    class="card"
+    color="surface-variant"
+    max-width="344"
+    :subtitle="`Email: ${user.email}`"
+    :title="`Name: ${user.name}`">
+    <template v-slot:actions>
+      <v-btn @click="deletUser(user.id)" text="Button" class="userButton">Delete</v-btn>
+    </template>
+  </v-card>
 </template>
 
 <style scoped>
-.deleteUserButton {
-  display: block;
-  background-color: rgb(255, 59, 59);
+.userButton {
+  color: rgb(245, 69, 69);
 }
 </style>

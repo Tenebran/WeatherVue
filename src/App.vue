@@ -101,12 +101,28 @@ export default defineComponent({
         <br />
 
         <v-btn color="success" size="large" @click="sendData()" variant="elevated" block>
-          Sign In
+          send
         </v-btn>
       </v-card>
     </v-sheet>
 
-    <div v-if="users.length === 0">You hav no Users</div>
+    <v-card
+      v-if="users.length === 0"
+      :variant="'elevated'"
+      class="card"
+      color="surface-variant"
+      max-width="344"
+      title="You hav no Users">
+    </v-card>
+
+    <v-card
+      v-if="!!users.length"
+      :variant="'elevated'"
+      class="card"
+      color="surface-variant"
+      max-width="344"
+      :title="`You hav ${users.length} Users`">
+    </v-card>
 
     <User v-for="user in users" :key="user.id" :user="user" :deletUser="deletUser" />
   </v-container>
@@ -141,5 +157,8 @@ input {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
+}
+.card {
+  margin: 20px 0;
 }
 </style>
