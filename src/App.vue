@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, Ref, ref, watch } from 'vue';
+import { defineComponent, Ref, ref } from 'vue';
 import { useCurrentWeather, useForecast } from './hooks/useCurrentWeather';
 
 export type userData = { name: string; email: string; password: string; id: string };
@@ -14,22 +14,20 @@ export default defineComponent({
     const { currentWeather, getCurrentWeather } = useCurrentWeather();
     const { forecast, getForecast } = useForecast();
     const expand = ref(false);
-
-    watch(
-      city,
-      (newValue: string) => {
-        localStorage.setItem('city', newValue);
-        newValue.length >= 2 ? (errorMessage.value = '') : '';
-      },
-      { immediate: true }
-    );
+    const isLoading = ref(true);
 
     const getWeather = () => {
+      isLoading.value = true;
       if (city.value.trim().length < 2) {
         errorMessage.value = 'The name must be at least 2 characters long.';
+        isLoading.value = false;
       } else {
-        getCurrentWeather('fplkgo', 'ru')
-          .then(() => getForecast('forgko', 'ru'))
+        getCurrentWeather(city.value, 'ru')
+          .then(() => {
+            getForecast(city.value, 'ru');
+            localStorage.setItem('city', city.value);
+          })
+          .finally(() => (isLoading.value = false))
           .catch((err) => {
             const axiosError = err._value || err.value || err;
 
@@ -37,6 +35,8 @@ export default defineComponent({
           });
       }
     };
+
+    city.value && getWeather();
 
     return {
       city,
@@ -48,6 +48,7 @@ export default defineComponent({
       forecast,
       snackbar,
       networkError,
+      isLoading,
     };
   },
 });
@@ -82,8 +83,10 @@ export default defineComponent({
           :disabled::append-inner="city.length <= 0"
           @click:append-inner="getWeather"></v-text-field>
       </v-responsive>
-
-      <v-card class="mx-auto weather_card" v-if="currentWeather">
+      <div v-if="isLoading" class="d-flex justify-center loading-spinner">
+        <v-progress-circular indeterminate color="primary" size="48"></v-progress-circular>
+      </div>
+      <v-card class="mx-auto weather_card" v-if="currentWeather && !isLoading">
         <v-card-item :title="currentWeather.cityName">
           <template v-slot:subtitle>
             {{ currentWeather.description }}
@@ -129,7 +132,7 @@ export default defineComponent({
           </v-list-item>
         </div>
       </v-card>
-      <v-card class="py-2 mx-auto weather_card_forecast">
+      <v-card class="py-2 mx-auto weather_card_forecast" v-if="!isLoading">
         <div>
           <v-list class="bg-transparent weather_card">
             <v-list-item
@@ -145,11 +148,7 @@ export default defineComponent({
   ></v-container>
 
   <div>
-    <v-snackbar
-      v-model="networkError"
-      v-if="!!networkError"
-      multi-line
-      style="background-color: aqua">
+    <v-snackbar color="error" v-model="networkError" v-if="!!networkError" multi-line>
       {{ networkError }}
       <template v-slot:actions>
         <v-btn variant="text" @click="networkError = ''"> Close </v-btn>
@@ -163,8 +162,8 @@ export default defineComponent({
   &_wrapper {
     box-sizing: border-box;
     margin: 0;
-    min-height: 500px;
-    min-width: 40vw;
+    min-height: 60vh;
+    min-width: 80vw;
     padding: 20px 0;
     border-radius: 20px;
     background: vars.$vue-blue;
@@ -181,10 +180,7 @@ export default defineComponent({
     overflow: hidden;
 
     &_item {
-      width: 177px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
+      width: 50%;
     }
     &_forecast {
       background: transparent;
@@ -201,14 +197,18 @@ export default defineComponent({
   }
   &_font {
     color: vars.$vue-green;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
     &_subtitle {
       color: vars.$vue-green;
       font-weight: 900;
       font-size: 18px;
       display: flex;
-      width: 100%;
       justify-content: center;
       flex-wrap: wrap;
+      align-items: center;
     }
   }
 
@@ -229,16 +229,38 @@ export default defineComponent({
     margin: 0 40px;
   }
 }
-
+.v-card-subtitle {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 .container {
   height: 100%;
 }
 
+.loading-spinner {
+  height: 30vh;
+}
+
 @media (max-width: 567px) {
-  .weather_wrapper {
-    min-height: 70vh;
-    display: flex;
-    justify-content: flex-end;
+  .weather {
+    &_wrapper {
+      min-height: 70vh;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &_card {
+      &_item {
+        margin: 4px 0;
+        width: 100%;
+      }
+    }
+    &_font {
+      &_subtitle {
+        min-width: 90vw;
+      }
+    }
   }
 }
 </style>

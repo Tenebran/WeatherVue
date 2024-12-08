@@ -31,7 +31,7 @@ export const useCurrentWeather = () => {
       const response = await fetchCurrentWeather(city, lang);
       currentWeather.value = {
         description: response.data.weather[0].description,
-        temp: `${Math.floor(response.data.main.temp)}°C`,
+        temp: `${response.data.main.temp > 0 ? '+' : ''}${Math.floor(response.data.main.temp)}°C`,
         feels_like: `${Math.floor(response.data.main.feels_like)}°C`,
         icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`,
         speed: `${Math.floor(response.data.wind.speed)}`,
@@ -81,7 +81,7 @@ export const useForecast = () => {
         return {
           day: formattedDay,
           icon: getWeatherIcon(icon),
-          temp: `${Math.floor(tempMax)}°/${Math.floor(tempMin)}°`,
+          temp: `${tempMax > 0 ? '+' : ''}${Math.floor(tempMax)}°/${Math.floor(tempMin)}°`,
         };
       });
     } catch (err: any) {
