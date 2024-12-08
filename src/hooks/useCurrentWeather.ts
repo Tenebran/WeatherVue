@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { fetchCurrentWeather, fetchForecast } from '../api/api';
 import { getWindDirection } from '../utils/getWindDirection';
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter';
@@ -22,8 +22,32 @@ export type ApiResponse = {
   }>;
 };
 
+export type CurrentWeatherType = {
+  description: string;
+  temp: string;
+  feels_like: string;
+  icon: string;
+  speed: number;
+  cityName: string;
+  humidity: string;
+  direction: string;
+  deg: number;
+  pressure: string;
+};
+
 export const useCurrentWeather = () => {
-  const currentWeather = ref();
+  const currentWeather: Ref<CurrentWeatherType> = ref({
+    description: '',
+    temp: '',
+    feels_like: '',
+    icon: '',
+    speed: 0,
+    cityName: '',
+    humidity: '',
+    direction: '',
+    deg: 0,
+    pressure: '',
+  });
   const error = ref();
 
   const getCurrentWeather = async (city: string, lang: string) => {
@@ -34,7 +58,7 @@ export const useCurrentWeather = () => {
         temp: `${response.data.main.temp > 0 ? '+' : ''}${Math.floor(response.data.main.temp)}°C`,
         feels_like: `${Math.floor(response.data.main.feels_like)}°C`,
         icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`,
-        speed: `${Math.floor(response.data.wind.speed)}`,
+        speed: Math.floor(response.data.wind.speed),
         cityName: response.data.name,
         humidity: `${response.data.main.humidity}%`,
         direction: getWindDirection(response.data.wind.deg),

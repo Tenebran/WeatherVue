@@ -1,57 +1,38 @@
-<script lang="ts">
-import { defineComponent, Ref, ref } from 'vue';
+<script lang="ts" setup>
+import { Ref, ref } from 'vue';
 import { useCurrentWeather, useForecast } from './hooks/useCurrentWeather';
-
+import AddItemForm from './components/AddItemForm.vue';
+import WeatherCurrentCard from './components/WeatherCurrentCard.vue';
 export type userData = { name: string; email: string; password: string; id: string };
 
-export default defineComponent({
-  setup() {
-    const city = ref(localStorage.getItem('city') || '');
-    const errorMessage: Ref<string, string> = ref('');
-    const networkError = ref();
-    const weather = ref();
-    const snackbar = ref(true);
-    const { currentWeather, getCurrentWeather } = useCurrentWeather();
-    const { forecast, getForecast } = useForecast();
-    const expand = ref(false);
-    const isLoading = ref(true);
+const city = ref(localStorage.getItem('city') || '');
+const errorMessage: Ref<string, string> = ref('');
+const networkError = ref();
+const { currentWeather, getCurrentWeather } = useCurrentWeather();
+const { forecast, getForecast } = useForecast();
+const isLoading = ref(false);
 
-    const getWeather = () => {
-      isLoading.value = true;
-      if (city.value.trim().length < 2) {
-        errorMessage.value = 'The name must be at least 2 characters long.';
-        isLoading.value = false;
-      } else {
-        getCurrentWeather(city.value, 'ru')
-          .then(() => {
-            getForecast(city.value, 'ru');
-            localStorage.setItem('city', city.value);
-          })
-          .finally(() => (isLoading.value = false))
-          .catch((err) => {
-            const axiosError = err._value || err.value || err;
+const getWeather = () => {
+  isLoading.value = true;
+  if (city.value.trim().length < 2) {
+    errorMessage.value = 'The name must be at least 2 characters long.';
+    isLoading.value = false;
+  } else {
+    getCurrentWeather(city.value, 'ru')
+      .then(() => {
+        getForecast(city.value, 'ru');
+        localStorage.setItem('city', city.value);
+      })
+      .finally(() => (isLoading.value = false))
+      .catch((err) => {
+        const axiosError = err._value || err.value || err;
 
-            networkError.value = axiosError.response?.data?.message || 'An unknown error occurred';
-          });
-      }
-    };
+        networkError.value = axiosError.response?.data?.message || 'An unknown error occurred';
+      });
+  }
+};
 
-    city.value && getWeather();
-
-    return {
-      city,
-      errorMessage,
-      getWeather,
-      weather,
-      currentWeather,
-      expand,
-      forecast,
-      snackbar,
-      networkError,
-      isLoading,
-    };
-  },
-});
+city.value && getWeather();
 </script>
 
 <template>
@@ -71,67 +52,11 @@ export default defineComponent({
           <span class="weather_font_subtitle"> {{ city ? city : 'you City' }}</span></span
         >
       </template>
-
-      <v-responsive class="weather_textfield" max-width="344">
-        <v-text-field
-          label="City"
-          variant="solo"
-          :append-inner-icon="city.length > 0 ? 'mdi-magnify' : ''"
-          :error="errorMessage.length > 1"
-          :error-messages="errorMessage"
-          v-model="city"
-          :disabled::append-inner="city.length <= 0"
-          @click:append-inner="getWeather"></v-text-field>
-      </v-responsive>
+      <AddItemForm v-model:city="city" :errorMessage="errorMessage" :getWeather="getWeather" />
       <div v-if="isLoading" class="d-flex justify-center loading-spinner">
         <v-progress-circular indeterminate color="primary" size="48"></v-progress-circular>
       </div>
-      <v-card class="mx-auto weather_card" v-if="currentWeather && !isLoading">
-        <v-card-item :title="currentWeather.cityName">
-          <template v-slot:subtitle>
-            {{ currentWeather.description }}
-            <div>{{ currentWeather.temp }}</div>
-            <div>Ощущаеться как: {{ currentWeather.feels_like }}</div>
-          </template>
-        </v-card-item>
-
-        <v-card-text class="py-0">
-          <v-row align="center" no-gutters>
-            <v-col class="text-right" cols="5"> </v-col>
-          </v-row>
-        </v-card-text>
-
-        <v-row align="center" no-gutters>
-          <v-icon size="124" class="weather_icon">
-            <img
-              class="me-1 pb-1"
-              :src="`${currentWeather.icon}`"
-              alt="Weather Icon"
-              style="width: 124px; height: 124px"
-          /></v-icon>
-        </v-row>
-
-        <div class="d-flex py-3 justify-space-between">
-          <v-list-item density="compact" prepend-icon="mdi-weather-windy">
-            <v-list-item-subtitle
-              >{{ Math.floor(currentWeather.speed) }} м/с, {{ currentWeather.direction }}
-              <v-icon
-                icon="mdi-navigation"
-                :style="{ transform: `rotate(${currentWeather.deg}deg)` }"
-                size="12">
-              </v-icon
-            ></v-list-item-subtitle>
-          </v-list-item>
-
-          <v-list-item density="compact" prepend-icon="mdi-weather-pouring">
-            <v-list-item-subtitle>{{ currentWeather.humidity }}</v-list-item-subtitle>
-          </v-list-item>
-
-          <v-list-item density="compact" prepend-icon="mdi-gauge">
-            <v-list-item-subtitle>{{ currentWeather.pressure }} мм рт. ст.</v-list-item-subtitle>
-          </v-list-item>
-        </div>
-      </v-card>
+      <WeatherCurrentCard :currentWeather="currentWeather" :isLoading="isLoading" />
       <v-card class="py-2 mx-auto weather_card_forecast" v-if="!isLoading">
         <div>
           <v-list class="bg-transparent weather_card">
@@ -221,10 +146,7 @@ export default defineComponent({
     align-items: center;
     margin: 10px;
   }
-  &_textfield {
-    width: 30vw;
-    min-width: 30vw;
-  }
+
   &_body {
     margin: 0 40px;
   }
