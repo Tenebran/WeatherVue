@@ -5,6 +5,8 @@ import AddItemForm from './components/AddItemForm.vue';
 import WeatherCurrentDayCard from './components/WeatherCurrentDayCard.vue';
 import WeatherForecast from './components/WeatherForecast.vue';
 
+import Select from './components/Select.vue';
+
 export type userData = { name: string; email: string; password: string; id: string };
 
 const city = ref(localStorage.getItem('city') || '');
@@ -54,7 +56,9 @@ city.value && getWeather();
           <span class="weather_font_subtitle"> {{ city ? city : 'you City' }}</span></span
         >
       </template>
+      <!-- <Select></Select> -->
       <AddItemForm v-model:city="city" :errorMessage="errorMessage" :getWeather="getWeather" />
+
       <div v-if="isLoading" class="d-flex justify-center loading-spinner">
         <v-progress-circular indeterminate color="primary" size="48"></v-progress-circular>
       </div>

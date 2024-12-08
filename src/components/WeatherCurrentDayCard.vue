@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto weather_card" v-if="currentWeather && !isLoading">
+  <v-card class="mx-auto weather_card" v-if="currentWeather.cityName">
     <v-card-item :title="currentWeather.cityName">
       <template v-slot:subtitle>
         {{ currentWeather.description }}
