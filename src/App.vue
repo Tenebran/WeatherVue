@@ -26,10 +26,16 @@ export default defineComponent({
       } else {
         axios
           .get(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=metric&appid=552fdd050682d4246694f7af40e8d829`
+            `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&units=metric&appid=552fdd050682d4246694f7af40e8d829`
           )
-          .then((resp) => (weather.value = resp.data))
-          .then((resp) => console.log(resp));
+          .then((resp) => {
+            weather.value = resp.data;
+            console.log('Response:', resp);
+            console.log('Response Data:', resp.data);
+            console.log('Response Data:', resp.data);
+            console.log('weather:', weather.value);
+          })
+          .catch((erorr) => console.log('erorr', erorr));
       }
     };
 
@@ -79,35 +85,37 @@ export default defineComponent({
           @click:append-inner="getWeather"></v-text-field>
       </v-responsive>
 
-      <v-card class="mx-auto weather_card">
+      <v-card class="mx-auto weather_card" v-if="weather">
         <v-card-item :title="weather.name">
           <template v-slot:subtitle>
-            <img
-              class="me-1 pb-1"
-              :src="`https://openweathermap.org/img/wn/04n@2x.png`"
-              alt="Weather Icon"
-              style="width: 24px; height: 24px" />
-            {{ weather.weather[0].main }}
+            {{ weather.weather[0].description }}
+            <div>{{ Math.floor(weather.main.temp) }}&deg;C</div>
+            <div>Ощущаеться как: {{ Math.floor(weather.main.feels_like) }}&deg;C</div>
           </template>
         </v-card-item>
 
         <v-card-text class="py-0">
           <v-row align="center" no-gutters>
-            <v-col class="text-h2" cols="6"> {{ Math.floor(weather.main.temp) }}&deg;C </v-col>
-
-            <v-col class="text-right" cols="6">
-              <v-icon color="error" icon="mdi-weather-hurricane" size="88"></v-icon>
-            </v-col>
+            <v-col class="text-right" cols="5"> </v-col>
+          </v-row>
+          <v-row align="center" no-gutters>
+            <v-icon size="88" class="weather_icon">
+              <img
+                class="me-1 pb-1"
+                :src="`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`"
+                alt="Weather Icon"
+                style="width: 88px; height: 88px"
+            /></v-icon>
           </v-row>
         </v-card-text>
 
         <div class="d-flex py-3 justify-space-between">
           <v-list-item density="compact" prepend-icon="mdi-weather-windy">
-            <v-list-item-subtitle>123 km/h</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ Math.floor(weather.wind.speed) }} м/с</v-list-item-subtitle>
           </v-list-item>
 
           <v-list-item density="compact" prepend-icon="mdi-weather-pouring">
-            <v-list-item-subtitle>48%</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ weather.main.humidity }}%</v-list-item-subtitle>
           </v-list-item>
         </div>
 
@@ -154,8 +162,8 @@ export default defineComponent({
   &_wrapper {
     box-sizing: border-box;
     margin: 0;
-    height: 500px;
-    min-width: 50vw;
+    min-height: 500px;
+    min-width: 40vw;
     padding: 20px 0;
     border-radius: 20px;
     background: vars.$vue-blue;
@@ -165,9 +173,9 @@ export default defineComponent({
     justify-content: center;
   }
   &_card {
-    width: 50vw;
     background: transparent;
-    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
   }
   &_font {
     color: vars.$vue-green;
@@ -175,14 +183,24 @@ export default defineComponent({
       color: vars.$vue-green;
       font-weight: 900;
       font-size: 18px;
-      display: block;
       display: flex;
       width: 100%;
       justify-content: center;
+      flex-wrap: wrap;
     }
+  }
+
+  &_icon {
+    background-color: vars.$vue-green;
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   &_textfield {
     width: 30vw;
+    min-width: 30vw;
   }
   &_body {
     margin: 0 40px;
