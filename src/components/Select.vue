@@ -12,21 +12,21 @@
       <template v-slot:selection="{ item }">
         <v-list-item v-if="item">
           <v-list-item-avatar>
-            <img :src="item?.flag" alt="Flag" />
+            <!-- <img :src="item?.flag" alt="Flag" /> -->
           </v-list-item-avatar>
-          <v-list-item-title>{{ item?.label }}</v-list-item-title>
+          <!-- <v-list-item-title>{{ item?.label }}</v-list-item-title> -->
         </v-list-item>
       </template>
 
       <!-- Слот для кастомного отображения элементов списка -->
-      <template v-slot:item="{ item }">
-        <v-list-item>
-          <v-list-item-avatar>
-            <img :src="item?.flag" alt="Flag" />
-          </v-list-item-avatar>
-          <v-list-item-title>{{ item?.label }}</v-list-item-title>
-        </v-list-item>
-      </template>
+      <!-- <template v-slot:item="{ item }"> -->
+      <v-list-item>
+        <v-list-item-avatar>
+          <!-- <img :src="item?.flag" alt="Flag" /> -->
+        </v-list-item-avatar>
+        <!-- <v-list-item-title>{{ item?.label }}</v-list-item-title> -->
+      </v-list-item>
+      <!-- </template> -->
     </v-select>
   </v-container>
 </template>
