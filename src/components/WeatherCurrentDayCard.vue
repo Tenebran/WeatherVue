@@ -56,4 +56,23 @@ defineProps<{
 }>();
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.weather {
+  &_card {
+    background: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: none;
+    overflow: hidden;
+  }
+  &_icon {
+    background-color: vars.$vue-green;
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+  }
+}
+</style>

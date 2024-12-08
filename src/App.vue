@@ -2,7 +2,9 @@
 import { Ref, ref } from 'vue';
 import { useCurrentWeather, useForecast } from './hooks/useCurrentWeather';
 import AddItemForm from './components/AddItemForm.vue';
-import WeatherCurrentCard from './components/WeatherCurrentCard.vue';
+import WeatherCurrentDayCard from './components/WeatherCurrentDayCard.vue';
+import WeatherForecast from './components/WeatherForecast.vue';
+
 export type userData = { name: string; email: string; password: string; id: string };
 
 const city = ref(localStorage.getItem('city') || '');
@@ -56,20 +58,8 @@ city.value && getWeather();
       <div v-if="isLoading" class="d-flex justify-center loading-spinner">
         <v-progress-circular indeterminate color="primary" size="48"></v-progress-circular>
       </div>
-      <WeatherCurrentCard :currentWeather="currentWeather" :isLoading="isLoading" />
-      <v-card class="py-2 mx-auto weather_card_forecast" v-if="!isLoading">
-        <div>
-          <v-list class="bg-transparent weather_card">
-            <v-list-item
-              class="weather_card_item"
-              v-for="item in forecast"
-              :key="item.day"
-              :append-icon="item.icon"
-              :subtitle="item.temp"
-              :title="item.day">
-            </v-list-item>
-          </v-list>
-        </div> </v-card></v-card
+      <WeatherCurrentDayCard :currentWeather="currentWeather" :isLoading="isLoading" />
+      <WeatherForecast :forecast="forecast" :isLoading="isLoading" /> </v-card
   ></v-container>
 
   <div>
@@ -97,29 +87,7 @@ city.value && getWeather();
     align-items: center;
     justify-content: center;
   }
-  &_card {
-    background: transparent;
-    display: flex;
-    flex-wrap: wrap;
-    box-shadow: none;
-    overflow: hidden;
 
-    &_item {
-      width: 50%;
-    }
-    &_forecast {
-      background: transparent;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: none;
-    }
-  }
-  &_cardFor {
-    background: transparent;
-    display: flex;
-    flex-wrap: wrap;
-  }
   &_font {
     color: vars.$vue-green;
     align-items: center;
@@ -135,20 +103,6 @@ city.value && getWeather();
       flex-wrap: wrap;
       align-items: center;
     }
-  }
-
-  &_icon {
-    background-color: vars.$vue-green;
-    border-radius: 50%;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-  }
-
-  &_body {
-    margin: 0 40px;
   }
 }
 .v-card-subtitle {

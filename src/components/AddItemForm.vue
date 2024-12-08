@@ -30,7 +30,7 @@ watch(localCity, (newValue) => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .weather_textfield {
   width: 30vw;
   min-width: 30vw;
