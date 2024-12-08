@@ -9,7 +9,11 @@ body {
   height: 100%;
   width: 100%;
   font-family: Arial, sans-serif;
-  background: linear-gradient(339deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
-  display: grid;
+  background: vars.$vue-green;
   place-items: center;
+  display: grid;
+
+  @media (max-width: 567px) {
+    display: block;
+  }
 }

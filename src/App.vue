@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, Ref, ref, watch } from 'vue';
 import axios from 'axios';
+import { useCurrentWeather, useForecast } from './hooks/useCurrentWeather';
 
 export type userData = { name: string; email: string; password: string; id: string };
 
@@ -9,6 +10,9 @@ export default defineComponent({
     const city = ref(localStorage.getItem('city') || '');
     let errorMessage: Ref<string, string> = ref('');
     let weather = ref();
+    const { currentWeather, error, getCurrentWeather } = useCurrentWeather();
+    const { forecast, getForecast } = useForecast();
+    const expand = ref(false);
 
     watch(
       city,
@@ -24,18 +28,7 @@ export default defineComponent({
         errorMessage.value = 'The name must be at least 2 characters long.';
         console.log('hello', errorMessage);
       } else {
-        axios
-          .get(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&units=metric&appid=552fdd050682d4246694f7af40e8d829`
-          )
-          .then((resp) => {
-            weather.value = resp.data;
-            console.log('Response:', resp);
-            console.log('Response Data:', resp.data);
-            console.log('Response Data:', resp.data);
-            console.log('weather:', weather.value);
-          })
-          .catch((erorr) => console.log('erorr', erorr));
+        getCurrentWeather(city.value, 'ru');
       }
     };
 
@@ -50,6 +43,9 @@ export default defineComponent({
       handleSearch,
       getWeather,
       weather,
+      currentWeather,
+      expand,
+      forecast,
     };
   },
 });
@@ -73,7 +69,7 @@ export default defineComponent({
         >
       </template>
 
-      <v-responsive class="mx-auto weather_textfield" max-width="344">
+      <v-responsive class="weather_textfield" max-width="344">
         <v-text-field
           label="City"
           variant="solo"
@@ -85,12 +81,12 @@ export default defineComponent({
           @click:append-inner="getWeather"></v-text-field>
       </v-responsive>
 
-      <v-card class="mx-auto weather_card" v-if="weather">
-        <v-card-item :title="weather.name">
+      <v-card class="mx-auto weather_card" v-if="currentWeather">
+        <v-card-item :title="currentWeather.cityName">
           <template v-slot:subtitle>
-            {{ weather.weather[0].description }}
-            <div>{{ Math.floor(weather.main.temp) }}&deg;C</div>
-            <div>Ощущаеться как: {{ Math.floor(weather.main.feels_like) }}&deg;C</div>
+            {{ currentWeather.description }}
+            <div>{{ currentWeather.temp }}</div>
+            <div>Ощущаеться как: {{ currentWeather.feels_like }}</div>
           </template>
         </v-card-item>
 
@@ -98,62 +94,52 @@ export default defineComponent({
           <v-row align="center" no-gutters>
             <v-col class="text-right" cols="5"> </v-col>
           </v-row>
-          <v-row align="center" no-gutters>
-            <v-icon size="88" class="weather_icon">
-              <img
-                class="me-1 pb-1"
-                :src="`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`"
-                alt="Weather Icon"
-                style="width: 88px; height: 88px"
-            /></v-icon>
-          </v-row>
         </v-card-text>
+
+        <v-row align="center" no-gutters>
+          <v-icon size="124" class="weather_icon">
+            <img
+              class="me-1 pb-1"
+              :src="`${currentWeather.icon}`"
+              alt="Weather Icon"
+              style="width: 124px; height: 124px"
+          /></v-icon>
+        </v-row>
 
         <div class="d-flex py-3 justify-space-between">
           <v-list-item density="compact" prepend-icon="mdi-weather-windy">
-            <v-list-item-subtitle>{{ Math.floor(weather.wind.speed) }} м/с</v-list-item-subtitle>
+            <v-list-item-subtitle
+              >{{ Math.floor(currentWeather.speed) }} м/с, {{ currentWeather.direction }}
+              <v-icon
+                icon="mdi-navigation"
+                :style="{ transform: `rotate(${currentWeather.deg}deg)` }"
+                size="12">
+              </v-icon
+            ></v-list-item-subtitle>
           </v-list-item>
 
           <v-list-item density="compact" prepend-icon="mdi-weather-pouring">
-            <v-list-item-subtitle>{{ weather.main.humidity }}%</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ currentWeather.humidity }}</v-list-item-subtitle>
+          </v-list-item>
+
+          <v-list-item density="compact" prepend-icon="mdi-gauge">
+            <v-list-item-subtitle>{{ currentWeather.pressure }} мм рт. ст.</v-list-item-subtitle>
           </v-list-item>
         </div>
-
-        <v-expand-transition>
-          <div v-if="expand">
-            <div class="py-2">
-              <v-slider
-                v-model="time"
-                :max="6"
-                :step="1"
-                :ticks="labels"
-                class="mx-4"
-                color="primary"
-                density="compact"
-                show-ticks="always"
-                thumb-size="10"
-                hide-details></v-slider>
-            </div>
-
-            <v-list class="bg-transparent">
-              <v-list-item
-                class="weather_card"
-                v-for="item in forecast"
-                :key="item.day"
-                :append-icon="item.icon"
-                :subtitle="item.temp"
-                :title="item.day">
-              </v-list-item>
-            </v-list>
-          </div>
-        </v-expand-transition>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-btn></v-btn>
-        </v-card-actions>
-      </v-card> </v-card
+      </v-card>
+      <v-card class="py-2 mx-auto weather_card_forecast">
+        <div>
+          <v-list class="bg-transparent weather_card">
+            <v-list-item
+              class="weather_card_item"
+              v-for="item in forecast"
+              :key="item.day"
+              :append-icon="item.icon"
+              :subtitle="item.temp"
+              :title="item.day">
+            </v-list-item>
+          </v-list>
+        </div> </v-card></v-card
   ></v-container>
 </template>
 
@@ -173,6 +159,27 @@ export default defineComponent({
     justify-content: center;
   }
   &_card {
+    background: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: none;
+    overflow: hidden;
+
+    &_item {
+      width: 177px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    &_forecast {
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: none;
+    }
+  }
+  &_cardFor {
     background: transparent;
     display: flex;
     flex-wrap: wrap;
@@ -197,6 +204,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px;
   }
   &_textfield {
     width: 30vw;
@@ -209,5 +217,13 @@ export default defineComponent({
 
 .container {
   height: 100%;
+}
+
+@media (max-width: 567px) {
+  .weather_wrapper {
+    min-height: 70vh;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 </style>
