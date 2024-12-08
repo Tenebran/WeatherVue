@@ -17,6 +17,7 @@
     "vuetify": "^3.7.5"
   },
   "devDependencies": {
+    "@types/node": "^22.10.1",
     "@vitejs/plugin-vue": "^5.2.1",
     "eslint-plugin-vue": "^9.32.0",
     "sass": "^1.63.6",

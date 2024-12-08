@@ -1,13 +1,8 @@
 import { ref } from 'vue';
 import { fetchCurrentWeather, fetchForecast } from '../api/api';
 import { getWindDirection } from '../utils/getWindDirection';
-
-type WeatherData = {
-  dt_txt: string;
-  main: {
-    temp: number;
-  };
-};
+import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter';
+import { getWeatherIcon } from '../utils/getWeatherIcon';
 
 export type ForecastDay = {
   day: string;
@@ -46,9 +41,9 @@ export const useCurrentWeather = () => {
         deg: response.data.wind.deg,
         pressure: (response.data.main.pressure * 0.75006).toFixed(2),
       };
-      console.log(response.data);
     } catch (err) {
       error.value = err;
+      throw error;
     }
   };
 
@@ -91,6 +86,7 @@ export const useForecast = () => {
       });
     } catch (err: any) {
       error.value = err.response ? err.response.data.message : 'Ошибка запроса';
+      throw error;
     }
   };
 
@@ -99,32 +95,4 @@ export const useForecast = () => {
     error,
     getForecast,
   };
-};
-
-const getWeatherIcon = (icon: string): string => {
-  const iconMap: Record<string, string> = {
-    '01d': 'mdi-weather-sunny',
-    '01n': 'mdi-weather-night',
-    '02d': 'mdi-weather-partly-cloudy',
-    '02n': 'mdi-weather-night-partly-cloudy',
-    '03d': 'mdi-weather-cloudy',
-    '03n': 'mdi-weather-cloudy',
-    '04d': 'mdi-weather-cloudy',
-    '04n': 'mdi-weather-cloudy',
-    '09d': 'mdi-weather-pouring',
-    '09n': 'mdi-weather-pouring',
-    '10d': 'mdi-weather-rainy',
-    '10n': 'mdi-weather-rainy',
-    '11d': 'mdi-weather-lightning',
-    '11n': 'mdi-weather-lightning',
-    '13d': 'mdi-weather-snowy',
-    '13n': 'mdi-weather-snowy',
-    '50d': 'mdi-weather-fog',
-    '50n': 'mdi-weather-fog',
-  };
-  return iconMap[icon] || 'mdi-weather-cloudy';
-};
-
-const capitalizeFirstLetter = (string: string): string => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 };

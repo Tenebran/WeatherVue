@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineComponent, Ref, ref, watch } from 'vue';
-import axios from 'axios';
 import { useCurrentWeather, useForecast } from './hooks/useCurrentWeather';
 
 export type userData = { name: string; email: string; password: string; id: string };
@@ -8,9 +7,11 @@ export type userData = { name: string; email: string; password: string; id: stri
 export default defineComponent({
   setup() {
     const city = ref(localStorage.getItem('city') || '');
-    let errorMessage: Ref<string, string> = ref('');
-    let weather = ref();
-    const { currentWeather, error, getCurrentWeather } = useCurrentWeather();
+    const errorMessage: Ref<string, string> = ref('');
+    const networkError = ref();
+    const weather = ref();
+    const snackbar = ref(true);
+    const { currentWeather, getCurrentWeather } = useCurrentWeather();
     const { forecast, getForecast } = useForecast();
     const expand = ref(false);
 
@@ -26,26 +27,27 @@ export default defineComponent({
     const getWeather = () => {
       if (city.value.trim().length < 2) {
         errorMessage.value = 'The name must be at least 2 characters long.';
-        console.log('hello', errorMessage);
       } else {
-        getCurrentWeather(city.value, 'ru');
-      }
-    };
+        getCurrentWeather('fplkgo', 'ru')
+          .then(() => getForecast('forgko', 'ru'))
+          .catch((err) => {
+            const axiosError = err._value || err.value || err;
 
-    const handleSearch = () => {
-      console.log(`Searching weather for:`);
-      weather;
+            networkError.value = axiosError.response?.data?.message || 'An unknown error occurred';
+          });
+      }
     };
 
     return {
       city,
       errorMessage,
-      handleSearch,
       getWeather,
       weather,
       currentWeather,
       expand,
       forecast,
+      snackbar,
+      networkError,
     };
   },
 });
@@ -141,6 +143,19 @@ export default defineComponent({
           </v-list>
         </div> </v-card></v-card
   ></v-container>
+
+  <div>
+    <v-snackbar
+      v-model="networkError"
+      v-if="!!networkError"
+      multi-line
+      style="background-color: aqua">
+      {{ networkError }}
+      <template v-slot:actions>
+        <v-btn variant="text" @click="networkError = ''"> Close </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
 </template>
 
 <style lang="scss" scoped>
