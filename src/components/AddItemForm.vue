@@ -9,11 +9,13 @@
       v-model="localCity"
       @click:append-inner="getWeather"
       @keydown.enter="getWeather"></v-text-field>
+    <Select />
   </v-responsive>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import Select from './Select.vue';
 
 const props = defineProps<{
   city: string;

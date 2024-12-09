@@ -1,0 +1,53 @@
+{
+  "todolist": {
+    "placeholder": "Inserisci un titolo per la tua lista di cose da fare...",
+    "error": {
+      "placeholderEmpty": "Il titolo non può essere vuoto.",
+      "placeholderTitleTooLong": "Il titolo è troppo lungo. Mantienilo sotto i 100 caratteri."
+    },
+    "filter": {
+      "all": "Tutti",
+      "active": "Attivi",
+      "completed": "Completati"
+    }
+  },
+  "task": {
+    "placeholder": "Inserisci un'attività...",
+    "error": {
+      "placeholderEmpty": "L'attività non può essere vuota.",
+      "placeholderTitleTooLong": "La descrizione dell'attività è troppo lunga. Mantienila concisa."
+    }
+  },
+  "login": {
+    "rememberME": "Ricordami",
+    "loginButton": "ACCEDI",
+    "email": "Email",
+    "password": "Password",
+    "emailInput": "Inserisci il tuo indirizzo email",
+    "passwordInput": "Inserisci la tua password",
+    "error": {
+      "email": "Inserisci un indirizzo email valido.",
+      "password": "La password è richiesta.",
+      "emailReq": "Inserisci il tuo indirizzo email.",
+      "passwordReq": "Inserisci la tua password."
+    },
+    "logout": "DISCONNETTERSI"
+  },
+  "languageSelector": {
+    "english": "🇬🇧 Inglese",
+    "russian": "🇷🇺 Russo",
+    "german": "🇩🇪 Tedesco",
+    "spanish": "🇪🇸 Spagnolo",
+    "french": "🇫🇷 Francese",
+    "italian": "🇮🇹 Italiano",
+    "japanese": "🇯🇵 Giapponese",
+    "korean": "🇰🇷 Coreano",
+    "dutch": "🇳🇱 Olandese",
+    "polish": "🇵🇱 Polacco",
+    "portuguese": "🇵🇹 Portoghese",
+    "swedish": "🇸🇪 Svedese",
+    "turkish": "🇹🇷 Turco",
+    "chinese": "🇨🇳 Cinese",
+    "arabic": "🇦🇪 Arabo"
+  }
+}

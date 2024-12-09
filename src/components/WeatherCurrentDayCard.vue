@@ -24,7 +24,7 @@
       /></v-icon>
     </v-row>
 
-    <div class="d-flex py-3 justify-space-between">
+    <div class="weather_card_list">
       <v-list-item density="compact" prepend-icon="mdi-weather-windy">
         <v-list-item-subtitle
           >{{ Math.floor(currentWeather.speed) }} м/с, {{ currentWeather.direction }}
@@ -64,6 +64,12 @@ defineProps<{
     flex-wrap: wrap;
     box-shadow: none;
     overflow: hidden;
+
+    &_list {
+      flex-direction: column;
+      display: flex;
+      justify-content: center;
+    }
   }
   &_icon {
     background-color: vars.$vue-green;

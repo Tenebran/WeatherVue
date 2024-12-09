@@ -1,0 +1,53 @@
+{
+  "todolist": {
+    "placeholder": "Insira um título para sua lista de tarefas...",
+    "error": {
+      "placeholderEmpty": "O título não pode estar vazio.",
+      "placeholderTitleTooLong": "O título é muito longo. Mantenha-o com menos de 100 caracteres."
+    },
+    "filter": {
+      "all": "Todos",
+      "active": "Ativos",
+      "completed": "Concluídos"
+    }
+  },
+  "task": {
+    "placeholder": "Insira uma tarefa...",
+    "error": {
+      "placeholderEmpty": "A tarefa não pode estar vazia.",
+      "placeholderTitleTooLong": "A descrição da tarefa é muito longa. Seja conciso."
+    }
+  },
+  "login": {
+    "rememberME": "Lembre-se de mim",
+    "loginButton": "ENTRAR",
+    "email": "Email",
+    "password": "Senha",
+    "emailInput": "Insira seu endereço de e-mail",
+    "passwordInput": "Insira sua senha",
+    "error": {
+      "email": "Por favor, insira um endereço de e-mail válido.",
+      "password": "A senha é obrigatória.",
+      "emailReq": "Insira o seu e-mail.",
+      "passwordReq": "Insira a sua senha."
+    },
+    "logout": "SAIR"
+  },
+  "languageSelector": {
+    "english": "🇬🇧 Inglês",
+    "russian": "🇷🇺 Russo",
+    "german": "🇩🇪 Alemão",
+    "spanish": "🇪🇸 Espanhol",
+    "french": "🇫🇷 Francês",
+    "italian": "🇮🇹 Italiano",
+    "japanese": "🇯🇵 Japonês",
+    "korean": "🇰🇷 Coreano",
+    "dutch": "🇳🇱 Holandês",
+    "polish": "🇵🇱 Polonês",
+    "portuguese": "🇵🇹 Português",
+    "swedish": "🇸🇪 Sueco",
+    "turkish": "🇹🇷 Turco",
+    "chinese": "🇨🇳 Chinês",
+    "arabic": "🇦🇪 Árabe"
+  }
+}

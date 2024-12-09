@@ -1,62 +1,67 @@
 <template>
-  <v-container>
-    <v-select
-      v-model="selectedLanguage"
-      :items="languages"
-      item-title="label"
-      item-value="code"
-      label="Select Language"
-      variant="solo"
-      dense>
-      <!-- Слот для отображения выбранного элемента -->
-      <template v-slot:selection="{ item }">
-        <v-list-item v-if="item">
-          <v-list-item-avatar>
-            <!-- <img :src="item?.flag" alt="Flag" /> -->
-          </v-list-item-avatar>
-          <!-- <v-list-item-title>{{ item?.label }}</v-list-item-title> -->
-        </v-list-item>
-      </template>
-
-      <!-- Слот для кастомного отображения элементов списка -->
-      <!-- <template v-slot:item="{ item }"> -->
-      <v-list-item>
+  <v-menu open-on-click open-on-hover>
+    <template v-slot:activator="{ props }">
+      <v-btn v-bind="props" variant="outlined" class="language-btn">
+        <img :src="currentLanguage.flag" alt="Flag" class="language-flag" />
+        {{ currentLanguage.label }}
+        <v-icon>mdi-chevron-down</v-icon>
+      </v-btn>
+    </template>
+    <v-list>
+      <v-list-item
+        v-for="language in languages"
+        :key="language.code"
+        @click="setLanguage(language)">
         <v-list-item-avatar>
-          <!-- <img :src="item?.flag" alt="Flag" /> -->
+          <img :src="language.flag" alt="Flag" />
         </v-list-item-avatar>
-        <!-- <v-list-item-title>{{ item?.label }}</v-list-item-title> -->
+        <v-list-item-title>{{ language.label }}</v-list-item-title>
       </v-list-item>
-      <!-- </template> -->
-    </v-select>
-  </v-container>
+    </v-list>
+  </v-menu>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue';
 
-// Тип языка
-interface Language {
-  code: string;
-  label: string;
-  flag: string;
-}
-
-// Список языков
-const languages: Language[] = [
-  { code: 'en', label: 'English', flag: 'https://flagcdn.com/w40/gb.png' },
-  { code: 'ru', label: 'Russian', flag: 'https://flagcdn.com/w40/ru.png' },
-  { code: 'fr', label: 'French', flag: 'https://flagcdn.com/w40/fr.png' },
+const languages = [
+  { code: 'en', label: 'English', flag: '/flags/gb.svg' },
+  { code: 'ru', label: 'Russian', flag: '/flags/ru.svg' },
+  { code: 'de', label: 'Deutsch', flag: '/flags/de.svg' },
+  { code: 'cn', label: '中文', flag: '/flags/cn.svg' },
+  { code: 'kr', label: '한국어', flag: '/flags/kr.svg' },
+  { code: 'fr', label: 'Français', flag: '/flags/fr.svg' },
+  { code: 'jp', label: '日本語', flag: '/flags/jp.svg' },
+  { code: 'nl', label: 'Nederlands', flag: '/flags/nl.svg' },
+  { code: 'se', label: 'Svenska', flag: '/flags/se.svg' },
+  { code: 'es', label: 'Español', flag: '/flags/es.svg' },
+  { code: 'it', label: 'Italiano', flag: '/flags/it.svg' },
+  { code: 'pl', label: 'Polski', flag: '/flags/pl.svg' },
+  { code: 'tr', label: 'Türkçe', flag: '/flags/tr.svg' },
+  { code: 'ae', label: 'العربية', flag: '/flags/ae.svg' },
+  { code: 'pt', label: 'Português', flag: '/flags/pt.svg' },
 ];
 
-// Выбранный язык
-const selectedLanguage = ref<string | null>(null);
+const currentLanguage = ref(languages[0]);
+
+const setLanguage = (language) => {
+  currentLanguage.value = language;
+  console.log('Selected language:', language.code);
+};
 </script>
 
 <style scoped>
-.v-list-item-avatar img {
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
-  border-radius: 50%;
+.language-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.language-flag {
+  width: 20px;
+  height: 14px;
+}
+
+.parent-container {
+  overflow: visible !important;
 }
 </style>

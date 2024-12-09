@@ -1,0 +1,53 @@
+{
+  "todolist": {
+    "placeholder": "Enter a title for your to-do list...",
+    "error": {
+      "placeholderEmpty": "Title cannot be empty.",
+      "placeholderTitleTooLong": "Title is too long. Please keep it under 100 characters."
+    },
+    "filter": {
+      "all": "All",
+      "active": "Active",
+      "completed": "Completed"
+    }
+  },
+  "task": {
+    "placeholder": "Enter a task...",
+    "error": {
+      "placeholderEmpty": "Task cannot be empty.",
+      "placeholderTitleTooLong": "Task description is too long. Please keep it concise."
+    }
+  },
+  "login": {
+    "rememberME": "Remember me",
+    "loginButton": "LOGIN",
+    "logout": "LOGOUT",
+    "email": "Email",
+    "password": "Password",
+    "emailInput": "Enter your email address",
+    "passwordInput": "Enter your password",
+    "error": {
+      "email": "Please enter a valid email address.",
+      "emailReq": "Please enter your email.",
+      "password": "Password is required.",
+      "passwordReq": " Please enter your password."
+    }
+  },
+  "languageSelector": {
+    "english": "🇬🇧 English",
+    "russian": "🇷🇺 Russian",
+    "german": "🇩🇪 Deutsch",
+    "spanish": "🇪🇸 Español",
+    "french": "🇫🇷 Français",
+    "italian": "🇮🇹 Italiano",
+    "japanese": "🇯🇵 日本語",
+    "korean": "🇰🇷 한국어",
+    "dutch": "🇳🇱 Nederlands",
+    "polish": "🇵🇱 Polski",
+    "portuguese": "🇵🇹 Português",
+    "swedish": "🇸🇪 Svenska",
+    "turkish": "🇹🇷 Türkçe",
+    "chinese": "🇨🇳 中文",
+    "arabic": "🇦🇪 العربية"
+  }
+}
