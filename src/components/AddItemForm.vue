@@ -4,8 +4,8 @@
       label="City"
       variant="solo"
       :append-inner-icon="localCity.length > 0 ? 'mdi-magnify' : ''"
-      :error="errorMessage.length > 1"
-      :error-messages="errorMessage"
+      :error="localCity.length < 2 && errorMessage.length > 1"
+      :error-messages="localCity.length > 2 ? '' : errorMessage"
       v-model="localCity"
       @click:append-inner="getWeather"
       @keydown.enter="getWeather"></v-text-field>

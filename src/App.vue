@@ -21,6 +21,7 @@ const getWeather = () => {
     errorMessage.value = t('error.long');
     isLoading.value = false;
   } else {
+    errorMessage.value = '';
     getCurrentWeather(city.value, localStorage.getItem('lang') ?? 'en')
       .then(() => {
         getForecast(city.value, localStorage.getItem('lang') ?? 'en');
