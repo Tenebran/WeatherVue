@@ -64,7 +64,12 @@ city.value && getWeather();
   ></v-container>
 
   <div>
-    <v-snackbar color="error" v-model="networkError" v-if="!!networkError" multi-line>
+    <v-snackbar
+      color="error"
+      v-model="networkError"
+      v-if="!!networkError"
+      multi-line
+      location="top">
       {{ networkError }}
       <template v-slot:actions>
         <v-btn variant="text" @click="networkError = ''">{{ t('error.button') }}</v-btn>
