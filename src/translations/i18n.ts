@@ -3,17 +3,17 @@ import { createI18n } from 'vue-i18n';
 import en from './en/en.json';
 import ru from './ru/ru.json';
 import de from './de/de.json';
-import ch from './ch/ch.json';
-import kr from './kr/kr.json';
+import zh from './zh/zh.json';
+import ko from './ko/ko.json';
 import fr from './fr/fr.json';
-import jp from './jp/jp.json';
+import ja from './ja/ja.json';
 import nl from './nl/nl.json';
-import se from './se/se.json';
+import sv from './sv/sv.json';
 import es from './es/es.json';
 import it from './it/it.json';
 import pl from './pl/pl.json';
 import tr from './tr/tr.json';
-import ae from './ae/ae.json';
+import ar from './ar/ar.json';
 import pt from './pt/pt.json';
 
 const i18n = createI18n({
@@ -23,17 +23,17 @@ const i18n = createI18n({
     en,
     ru,
     de,
-    ch,
-    kr,
+    zh,
+    ko,
     fr,
-    jp,
+    ja,
     nl,
-    se,
+    sv,
     es,
     it,
     pl,
     tr,
-    ae,
+    ar,
     pt,
   },
 });

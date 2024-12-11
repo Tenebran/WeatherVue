@@ -1,5 +1,29 @@
 {
-  "WeatherVue": { "Title": "Bienvenue sur WeatherVue" },
+  "WeatherVue": {
+    "Title": "Bienvenue sur WeatherVue",
+    "Subtitle": "Découvrez la météo actuelle à",
+    "youcity": "votre ville"
+  },
+  "directions": {
+    "N": "N",
+    "NE": "NE",
+    "E": "E",
+    "SE": "sv",
+    "S": "S",
+    "SW": "SO",
+    "W": "O",
+    "NW": "NO"
+  },
+  "weather": {
+    "ms": "m/s",
+    "feels_like": "Ressenti comme :",
+    "mmHg": "mm Hg"
+  },
+  "error": {
+    "some": "Une erreur inconnue s'est produite.",
+    "button": "fermer",
+    "long": "Le nom doit comporter au moins 2 caractères."
+  },
   "languageSelector": {
     "en": "🇬🇧 Anglais",
     "ru": "🇷🇺 Russe",
@@ -7,14 +31,14 @@
     "es": "🇪🇸 Espagnol",
     "fr": "🇫🇷 Français",
     "it": "🇮🇹 Italien",
-    "jp": "🇯🇵 Japonais",
-    "kr": "🇰🇷 Coréen",
+    "ja": "🇯🇵 Japonais",
+    "ko": "🇰🇷 Coréen",
     "nl": "🇳🇱 Néerlandais",
     "pl": "🇵🇱 Polonais",
     "pt": "🇵🇹 Portugais",
-    "se": "🇸🇪 Suédois",
+    "sv": "🇸🇪 Suédois",
     "tr": "🇹🇷 Turc",
-    "ch": "🇨🇳 Chinois",
-    "ae": "🇦🇪 Arabe"
+    "zh": "🇨🇳 Chinois",
+    "ar": "🇦🇪 Arabe"
   }
 }

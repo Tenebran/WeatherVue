@@ -1,5 +1,29 @@
 {
-  "WeatherVue": { "Title": "Witaj w WeatherVue" },
+  "WeatherVue": {
+    "Title": "Witamy w WeatherVue",
+    "Subtitle": "Sprawdź aktualną pogodę w",
+    "youcity": "twoje miasto"
+  },
+  "directions": {
+    "N": "Północ",
+    "NE": "Północny wschód",
+    "E": "Wschód",
+    "SE": "Południowy wschód",
+    "S": "Południe",
+    "SW": "Południowy zachód",
+    "W": "Zachód",
+    "NW": "Północny zachód"
+  },
+  "weather": {
+    "ms": "m/s",
+    "feels_like": "Odczuwalna:",
+    "mmHg": "mm Hg"
+  },
+  "error": {
+    "some": "Wystąpił nieznany błąd.",
+    "button": "zamknij",
+    "long": "Nazwa musi mieć co najmniej 2 znaki."
+  },
   "languageSelector": {
     "en": "🇬🇧 Angielski",
     "ru": "🇷🇺 Rosyjski",
@@ -7,14 +31,14 @@
     "es": "🇪🇸 Hiszpański",
     "fr": "🇫🇷 Francuski",
     "it": "🇮🇹 Włoski",
-    "jp": "🇯🇵 Japoński",
-    "kr": "🇰🇷 Koreański",
+    "ja": "🇯🇵 Japoński",
+    "ko": "🇰🇷 Koreański",
     "nl": "🇳🇱 Niderlandzki",
     "pl": "🇵🇱 Polski",
     "pt": "🇵🇹 Portugalski",
-    "se": "🇸🇪 Szwedzki",
+    "sv": "🇸🇪 Szwedzki",
     "tr": "🇹🇷 Turecki",
-    "ch": "🇨🇳 Chiński",
-    "ae": "🇦🇪 Arabski"
+    "zh": "🇨🇳 Chiński",
+    "ar": "🇦🇪 Arabski"
   }
 }

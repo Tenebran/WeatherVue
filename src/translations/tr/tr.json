@@ -1,5 +1,29 @@
 {
-  "WeatherVue": { "Title": "WeatherVue'ye Hoş Geldiniz" },
+  "WeatherVue": {
+    "Title": "WeatherVue'a Hoş Geldiniz",
+    "Subtitle": "Bulunduğunuz yerdeki mevcut hava durumunu keşfedin",
+    "youcity": "senin şehrin"
+  },
+  "directions": {
+    "N": "K",
+    "NE": "KD",
+    "E": "D",
+    "SE": "GD",
+    "S": "G",
+    "SW": "GB",
+    "W": "B",
+    "NW": "KB"
+  },
+  "weather": {
+    "ms": "m/s",
+    "feels_like": "Hissedilen:",
+    "mmHg": "mm Hg"
+  },
+  "error": {
+    "some": "Bilinmeyen bir hata oluştu.",
+    "button": "kapat",
+    "long": "İsim en az 2 karakter uzunluğunda olmalıdır."
+  },
   "languageSelector": {
     "en": "🇬🇧 İngilizce",
     "ru": "🇷🇺 Rusça",
@@ -7,14 +31,14 @@
     "es": "🇪🇸 İspanyolca",
     "fr": "🇫🇷 Fransızca",
     "it": "🇮🇹 İtalyanca",
-    "jp": "🇯🇵 Japonca",
-    "kr": "🇰🇷 Korece",
+    "ja": "🇯🇵 Japonca",
+    "ko": "🇰🇷 Korece",
     "nl": "🇳🇱 Hollandaca",
     "pl": "🇵🇱 Lehçe",
     "pt": "🇵🇹 Portekizce",
-    "se": "🇸🇪 İsveççe",
+    "sv": "🇸🇪 İsveççe",
     "tr": "🇹🇷 Türkçe",
-    "ch": "🇨🇳 Çince",
-    "ae": "🇦🇪 Arapça"
+    "zh": "🇨🇳 Çince",
+    "ar": "🇦🇪 Arapça"
   }
 }

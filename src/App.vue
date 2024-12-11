@@ -4,35 +4,36 @@ import { useCurrentWeather, useForecast } from './hooks/useCurrentWeather';
 import AddItemForm from './components/AddItemForm.vue';
 import WeatherCurrentDayCard from './components/WeatherCurrentDayCard.vue';
 import WeatherForecast from './components/WeatherForecast.vue';
-
+import { useI18n } from 'vue-i18n';
 export type userData = { name: string; email: string; password: string; id: string };
 
+const { t } = useI18n();
 const city = ref(localStorage.getItem('city') || '');
 const errorMessage: Ref<string, string> = ref('');
 const networkError = ref();
 const { currentWeather, getCurrentWeather } = useCurrentWeather();
 const { forecast, getForecast } = useForecast();
 const isLoading = ref(false);
+
 const getWeather = () => {
   isLoading.value = true;
   if (city.value.trim().length < 2) {
-    errorMessage.value = 'The name must be at least 2 characters long.';
+    errorMessage.value = t('error.long');
     isLoading.value = false;
   } else {
-    getCurrentWeather(city.value, 'ru')
+    getCurrentWeather(city.value, localStorage.getItem('lang') ?? 'en')
       .then(() => {
-        getForecast(city.value, 'ru');
+        getForecast(city.value, localStorage.getItem('lang') ?? 'en');
         localStorage.setItem('city', city.value);
       })
       .finally(() => (isLoading.value = false))
       .catch((err) => {
         const axiosError = err._value || err.value || err;
 
-        networkError.value = axiosError.response?.data?.message || 'An unknown error occurred';
+        networkError.value = axiosError.response?.data?.message || t('error.some');
       });
   }
 };
-
 
 city.value && getWeather();
 </script>
@@ -46,12 +47,12 @@ city.value && getWeather();
       theme="dark"
       width="100%">
       <template v-slot:title>
-        <span class="weather_font">Welcome to WeatherVue</span>
+        <span class="weather_font">{{ t('WeatherVue.Title') }}</span>
       </template>
       <template v-slot:subtitle>
-        <span>Discover the current weather in </span>
+        <span>{{ t('WeatherVue.Subtitle') }}</span>
       </template>
-      <span class="weather_font_subtitle"> {{ city ? city : 'you City' }}</span>
+      <span class="weather_font_subtitle"> {{ city ? city : t('WeatherVue.youcity') }}</span>
       <AddItemForm v-model:city="city" :errorMessage="errorMessage" :getWeather="getWeather" />
 
       <div v-if="isLoading" class="d-flex justify-center loading-spinner">
@@ -65,7 +66,7 @@ city.value && getWeather();
     <v-snackbar color="error" v-model="networkError" v-if="!!networkError" multi-line>
       {{ networkError }}
       <template v-slot:actions>
-        <v-btn variant="text" @click="networkError = ''"> Close </v-btn>
+        <v-btn variant="text" @click="networkError = ''">{{ t('error.button') }}</v-btn>
       </template>
     </v-snackbar>
   </div>

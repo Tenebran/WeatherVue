@@ -1,5 +1,29 @@
 {
-  "WeatherVue": { "Title": "Welkom bij WeatherVue" },
+  "WeatherVue": {
+    "Title": "Welkom bij WeatherVue",
+    "Subtitle": "Ontdek het huidige weer in",
+    "youcity": "jouw stad"
+  },
+  "directions": {
+    "N": "N",
+    "NE": "NO",
+    "E": "O",
+    "SE": "ZO",
+    "S": "Z",
+    "SW": "ZW",
+    "W": "W",
+    "NW": "NW"
+  },
+  "weather": {
+    "ms": "m/s",
+    "feels_like": "Voelt als:",
+    "mmHg": "mm Hg"
+  },
+  "error": {
+    "some": "Er is een onbekende fout opgetreden.",
+    "button": "sluiten",
+    "long": "De naam moet minimaal 2 tekens lang zijn."
+  },
   "languageSelector": {
     "en": "🇬🇧 Engels",
     "ru": "🇷🇺 Russisch",
@@ -7,14 +31,14 @@
     "es": "🇪🇸 Spaans",
     "fr": "🇫🇷 Frans",
     "it": "🇮🇹 Italiaans",
-    "jp": "🇯🇵 Japans",
-    "kr": "🇰🇷 Koreaans",
+    "ja": "🇯🇵 Japans",
+    "ko": "🇰🇷 Koreaans",
     "nl": "🇳🇱 Nederlands",
     "pl": "🇵🇱 Pools",
     "pt": "🇵🇹 Portugees",
-    "se": "🇸🇪 Zweeds",
+    "sv": "🇸🇪 Zweeds",
     "tr": "🇹🇷 Turks",
-    "ch": "🇨🇳 Chinees",
-    "ae": "🇦🇪 Arabisch"
+    "zh": "🇨🇳 Chinees",
+    "ar": "🇦🇪 Arabisch"
   }
 }

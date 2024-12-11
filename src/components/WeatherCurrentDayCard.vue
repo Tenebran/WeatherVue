@@ -4,7 +4,7 @@
       <template v-slot:subtitle>
         {{ currentWeather.description }}
         <div>{{ currentWeather.temp }}</div>
-        <div>Ощущаеться как: {{ currentWeather.feels_like }}</div>
+        <div>{{ t('weather.feels_like') }} {{ currentWeather.feels_like }}</div>
       </template>
     </v-card-item>
 
@@ -27,7 +27,8 @@
     <div class="weather_card_list">
       <v-list-item density="compact" prepend-icon="mdi-weather-windy">
         <v-list-item-subtitle
-          >{{ Math.floor(currentWeather.speed) }} м/с, {{ currentWeather.direction }}
+          >{{ Math.floor(currentWeather.speed) }} {{ t('weather.ms') }},
+          {{ t(currentWeather.direction) }}
           <v-icon
             icon="mdi-navigation"
             :style="{ transform: `rotate(${currentWeather.deg}deg)` }"
@@ -41,19 +42,24 @@
       </v-list-item>
 
       <v-list-item density="compact" prepend-icon="mdi-gauge">
-        <v-list-item-subtitle>{{ currentWeather.pressure }} мм рт. ст.</v-list-item-subtitle>
+        <v-list-item-subtitle
+          >{{ currentWeather.pressure }} {{ t('weather.mmHg') }}</v-list-item-subtitle
+        >
       </v-list-item>
     </div>
   </v-card>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import { CurrentWeatherType } from '../hooks/useCurrentWeather';
+
+const { t } = useI18n();
+
 defineProps<{
   currentWeather: CurrentWeatherType;
   isLoading: boolean;
 }>();
-
 </script>
 
 <style scoped lang="scss">

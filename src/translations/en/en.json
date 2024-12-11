@@ -1,5 +1,29 @@
 {
-  "WeatherVue": { "Title": "Welcome to WeatherVue", "Subtitle": "Discover the current weather in" },
+  "WeatherVue": {
+    "Title": "Welcome to WeatherVue",
+    "Subtitle": "Discover the current weather in",
+    "youcity": "you City"
+  },
+  "directions": {
+    "N": "N",
+    "NE": "NE",
+    "E": "E",
+    "SE": "sv",
+    "S": "S",
+    "SW": "SW",
+    "W": "W",
+    "NW": "NW"
+  },
+  "weather": {
+    "ms": "m/s",
+    "feels_like": "Feels like:",
+    "mmHg": "mm Hg"
+  },
+  "error": {
+    "some": "An unknown error occurred.",
+    "button": "close",
+    "long": "The name must be at least 2 characters long."
+  },
   "languageSelector": {
     "en": "🇬🇧 English",
     "ru": "🇷🇺 Russian",
@@ -7,14 +31,14 @@
     "es": "🇪🇸 Español",
     "fr": "🇫🇷 Français",
     "it": "🇮🇹 Italiano",
-    "jp": "🇯🇵 日本語",
-    "kr": "🇰🇷 한국어",
+    "ja": "🇯🇵 日本語",
+    "ko": "🇰🇷 한국어",
     "nl": "🇳🇱 Nederlands",
     "pl": "🇵🇱 Polski",
     "pt": "🇵🇹 Português",
-    "se": "🇸🇪 Svenska",
+    "sv": "🇸🇪 Svenska",
     "tr": "🇹🇷 Türkçe",
-    "ch": "🇨🇳 中文",
-    "ae": "🇦🇪 العربية"
+    "zh": "🇨🇳 中文",
+    "ar": "🇦🇪 العربية"
   }
 }

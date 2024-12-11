@@ -1,0 +1,44 @@
+{
+  "WeatherVue": {
+    "Title": "Välkommen till WeatherVue",
+    "Subtitle": "Upptäck det aktuella vädret i",
+    "youcity": "din stad"
+  },
+  "directions": {
+    "N": "N",
+    "NE": "NE",
+    "E": "Ö",
+    "SE": "SO",
+    "S": "S",
+    "SW": "SV",
+    "W": "V",
+    "NW": "NV"
+  },
+  "weather": {
+    "ms": "m/s",
+    "feels_like": "Känns som:",
+    "mmHg": "mm Hg"
+  },
+  "error": {
+    "some": "Ett okänt fel har inträffat.",
+    "button": "stäng",
+    "long": "Namnet måste vara minst 2 tecken långt."
+  },
+  "languageSelector": {
+    "en": "🇬🇧 Engelska",
+    "ru": "🇷🇺 Ryska",
+    "de": "🇩🇪 Tyska",
+    "es": "🇪🇸 Spanska",
+    "fr": "🇫🇷 Franska",
+    "it": "🇮🇹 Italienska",
+    "ja": "🇯🇵 Japanska",
+    "ko": "🇰🇷 krska",
+    "nl": "🇳🇱 Holländska",
+    "pl": "🇵🇱 Polska",
+    "pt": "🇵🇹 Portugisiska",
+    "sv": "🇸🇪 Svenska",
+    "tr": "🇹🇷 Turkiska",
+    "zh": "🇨🇳 Kinesiska",
+    "ar": "🇦🇪 Arabiska"
+  }
+}

@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, Ref } from 'vue';
+import { ref, computed, Ref } from 'vue';
 import RuFlag from '../img/flag/flag-ru.svg';
 import EnFlag from '../img/flag/flag-united-kingdom-flag.svg';
 import ARFlag from '../img/flag/flag-for-flag-united-arab-emirates.svg';
@@ -42,6 +42,10 @@ import PTFlag from '../img/flag/flag-portugal.svg';
 import JAFlag from '../img/flag/flag-for-japan.svg';
 import { useI18n } from 'vue-i18n';
 
+const props = defineProps<{
+  getWeather: () => void;
+}>();
+
 type LanguagesType = { code: string; flag: string; label: string };
 
 const { t, locale } = useI18n();
@@ -53,17 +57,17 @@ const languages = computed<LanguagesType[]>(() =>
     { code: 'en', flag: EnFlag },
     { code: 'ru', flag: RuFlag },
     { code: 'de', flag: DEFlag },
-    { code: 'ch', flag: ZHFlag },
-    { code: 'kr', flag: KOFlag },
+    { code: 'zh', flag: ZHFlag },
+    { code: 'ko', flag: KOFlag },
     { code: 'fr', flag: FRFlag },
-    { code: 'jp', flag: JAFlag },
+    { code: 'ja', flag: JAFlag },
     { code: 'nl', flag: NLFlag },
-    { code: 'se', flag: SVFlag },
+    { code: 'sv', flag: SVFlag },
     { code: 'es', flag: ESFlag },
     { code: 'it', flag: ITFlag },
     { code: 'pl', flag: PLFlag },
     { code: 'tr', flag: TRFlag },
-    { code: 'ae', flag: ARFlag },
+    { code: 'ar', flag: ARFlag },
     { code: 'pt', flag: PTFlag },
   ].map((language) => ({
     ...language,
@@ -73,13 +77,13 @@ const languages = computed<LanguagesType[]>(() =>
 
 currentLanguage.value =
   languages.value.find((lang) => lang.code === localStorage.getItem('lang')) || languages.value[0];
-
 locale.value = currentLanguage.value.code;
 
 const changeLanguage = (lang: LanguagesType) => {
   locale.value = lang.code;
   localStorage.setItem('lang', lang.code);
   currentLanguage.value = lang;
+  props.getWeather();
 };
 </script>
 

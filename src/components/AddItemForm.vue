@@ -9,7 +9,7 @@
       v-model="localCity"
       @click:append-inner="getWeather"
       @keydown.enter="getWeather"></v-text-field>
-    <Select />
+    <Select :getWeather="getWeather" />
   </v-responsive>
 </template>
 
