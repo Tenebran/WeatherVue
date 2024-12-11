@@ -1,9 +1,9 @@
 <template>
-  <v-menu open-on-click open-on-hover>
-    <template v-slot:activator="{ props }">
-      <v-btn v-bind="props" variant="outlined" class="language-btn">
-        <img :src="currentLanguage.flag" alt="Flag" class="language-flag" />
-        {{ currentLanguage.label }}
+  <v-menu open-on-click>
+    <template v-slot:activator="{ props }" v-if="currentLanguage">
+      <v-btn v-bind="props" variant="outlined" class="select_btn">
+        <img :src="currentLanguage.flag" alt="Flag" class="select_flag" />
+        {{ currentLanguage.code }}
         <v-icon>mdi-chevron-down</v-icon>
       </v-btn>
     </template>
@@ -11,54 +11,99 @@
       <v-list-item
         v-for="language in languages"
         :key="language.code"
-        @click="setLanguage(language)">
+        @click="changeLanguage(language)">
         <v-list-item-avatar>
-          <img :src="language.flag" alt="Flag" />
+          <img class="select_logo" :src="language.flag" alt="Flag" />
         </v-list-item-avatar>
-        <v-list-item-title>{{ language.label }}</v-list-item-title>
+        <v-list-item-title class="select_logo_title">
+          {{ language.label }}
+        </v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
+import { ref, computed, watch, Ref } from 'vue';
+import RuFlag from '../img/flag/flag-ru.svg';
+import EnFlag from '../img/flag/flag-united-kingdom-flag.svg';
+import ARFlag from '../img/flag/flag-for-flag-united-arab-emirates.svg';
+import DEFlag from '../img/flag/flag-de.svg';
+import ESFlag from '../img/flag/flag-for-flag-spain.svg';
+import ITFlag from '../img/flag/flag-for-flag-italy.svg';
+import FRFlag from '../img/flag/flag-for-flag-france.svg';
+import ZHFlag from '../img/flag/flag-for-flag-china.svg';
+import KOFlag from '../img/flag/flag-kp.svg';
+import PLFlag from '../img/flag/flag-for-flag-poland.svg';
+import NLFlag from '../img/flag/flag-for-flag-netherlands.svg';
+import SVFlag from '../img/flag/flag-for-flag-sweden.svg';
+import TRFlag from '../img/flag/flag-turkey.svg';
+import PTFlag from '../img/flag/flag-portugal.svg';
+import JAFlag from '../img/flag/flag-for-japan.svg';
+import { useI18n } from 'vue-i18n';
 
-const languages = [
-  { code: 'en', label: 'English', flag: '/flags/gb.svg' },
-  { code: 'ru', label: 'Russian', flag: '/flags/ru.svg' },
-  { code: 'de', label: 'Deutsch', flag: '/flags/de.svg' },
-  { code: 'cn', label: '中文', flag: '/flags/cn.svg' },
-  { code: 'kr', label: '한국어', flag: '/flags/kr.svg' },
-  { code: 'fr', label: 'Français', flag: '/flags/fr.svg' },
-  { code: 'jp', label: '日本語', flag: '/flags/jp.svg' },
-  { code: 'nl', label: 'Nederlands', flag: '/flags/nl.svg' },
-  { code: 'se', label: 'Svenska', flag: '/flags/se.svg' },
-  { code: 'es', label: 'Español', flag: '/flags/es.svg' },
-  { code: 'it', label: 'Italiano', flag: '/flags/it.svg' },
-  { code: 'pl', label: 'Polski', flag: '/flags/pl.svg' },
-  { code: 'tr', label: 'Türkçe', flag: '/flags/tr.svg' },
-  { code: 'ae', label: 'العربية', flag: '/flags/ae.svg' },
-  { code: 'pt', label: 'Português', flag: '/flags/pt.svg' },
-];
+type LanguagesType = { code: string; flag: string; label: string };
 
-const currentLanguage = ref(languages[0]);
+const { t, locale } = useI18n();
 
-const setLanguage = (language) => {
-  currentLanguage.value = language;
-  console.log('Selected language:', language.code);
+const currentLanguage: Ref<LanguagesType | null> = ref(null);
+
+const languages = computed<LanguagesType[]>(() =>
+  [
+    { code: 'en', flag: EnFlag },
+    { code: 'ru', flag: RuFlag },
+    { code: 'de', flag: DEFlag },
+    { code: 'ch', flag: ZHFlag },
+    { code: 'kr', flag: KOFlag },
+    { code: 'fr', flag: FRFlag },
+    { code: 'jp', flag: JAFlag },
+    { code: 'nl', flag: NLFlag },
+    { code: 'se', flag: SVFlag },
+    { code: 'es', flag: ESFlag },
+    { code: 'it', flag: ITFlag },
+    { code: 'pl', flag: PLFlag },
+    { code: 'tr', flag: TRFlag },
+    { code: 'ae', flag: ARFlag },
+    { code: 'pt', flag: PTFlag },
+  ].map((language) => ({
+    ...language,
+    label: t(`languageSelector.${language.code}`),
+  }))
+);
+
+currentLanguage.value =
+  languages.value.find((lang) => lang.code === localStorage.getItem('lang')) || languages.value[0];
+
+locale.value = currentLanguage.value.code;
+
+const changeLanguage = (lang: LanguagesType) => {
+  locale.value = lang.code;
+  localStorage.setItem('lang', lang.code);
+  currentLanguage.value = lang;
 };
 </script>
 
-<style scoped>
-.language-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.language-flag {
-  width: 20px;
-  height: 14px;
+<style scoped lang="scss">
+.select {
+  &_btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  &_flag {
+    width: 24px;
+    height: 24px;
+    margin: 0 10px 0 0;
+  }
+  &_logo {
+    width: 24px;
+    height: 24px;
+    margin: 0 10px 0 0;
+    display: inline;
+    &_title {
+      display: inline-block;
+    }
+  }
 }
 
 .parent-container {

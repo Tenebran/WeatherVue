@@ -1,53 +1,20 @@
 {
-  "todolist": {
-    "placeholder": "Voer een titel in voor je takenlijst...",
-    "error": {
-      "placeholderEmpty": "De titel mag niet leeg zijn.",
-      "placeholderTitleTooLong": "De titel is te lang. Houd het onder de 100 tekens."
-    },
-    "filter": {
-      "all": "Alle",
-      "active": "Actief",
-      "completed": "Voltooid"
-    }
-  },
-  "task": {
-    "placeholder": "Voer een taak in...",
-    "error": {
-      "placeholderEmpty": "De taak mag niet leeg zijn.",
-      "placeholderTitleTooLong": "De taakbeschrijving is te lang. Houd het kort."
-    }
-  },
-  "login": {
-    "rememberME": "Onthoud mij",
-    "loginButton": "INLOGGEN",
-    "email": "E-mail",
-    "password": "Wachtwoord",
-    "emailInput": "Voer je e-mailadres in",
-    "passwordInput": "Voer je wachtwoord in",
-    "error": {
-      "email": "Voer een geldig e-mailadres in.",
-      "password": "Wachtwoord is verplicht.",
-      "emailReq": "Voer uw e-mailadres in.",
-      "passwordReq": "Voer uw wachtwoord in."
-    },
-    "logout": "UITLOGGEN"
-  },
+  "WeatherVue": { "Title": "Welkom bij WeatherVue" },
   "languageSelector": {
-    "english": "🇬🇧 Engels",
-    "russian": "🇷🇺 Russisch",
-    "german": "🇩🇪 Duits",
-    "spanish": "🇪🇸 Spaans",
-    "french": "🇫🇷 Frans",
-    "italian": "🇮🇹 Italiaans",
-    "japanese": "🇯🇵 Japans",
-    "korean": "🇰🇷 Koreaans",
-    "dutch": "🇳🇱 Nederlands",
-    "polish": "🇵🇱 Pools",
-    "portuguese": "🇵🇹 Portugees",
-    "swedish": "🇸🇪 Zweeds",
-    "turkish": "🇹🇷 Turks",
-    "chinese": "🇨🇳 Chinees",
-    "arabic": "🇦🇪 Arabisch"
+    "en": "🇬🇧 Engels",
+    "ru": "🇷🇺 Russisch",
+    "de": "🇩🇪 Duits",
+    "es": "🇪🇸 Spaans",
+    "fr": "🇫🇷 Frans",
+    "it": "🇮🇹 Italiaans",
+    "jp": "🇯🇵 Japans",
+    "kr": "🇰🇷 Koreaans",
+    "nl": "🇳🇱 Nederlands",
+    "pl": "🇵🇱 Pools",
+    "pt": "🇵🇹 Portugees",
+    "se": "🇸🇪 Zweeds",
+    "tr": "🇹🇷 Turks",
+    "ch": "🇨🇳 Chinees",
+    "ae": "🇦🇪 Arabisch"
   }
 }

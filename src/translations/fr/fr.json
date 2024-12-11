@@ -1,48 +1,20 @@
 {
-  "todolist": {
-    "placeholder": "Entrez un titre pour votre liste de tâches...",
-    "error": {
-      "placeholderEmpty": "Le titre ne peut pas être vide.",
-      "placeholderTitleTooLong": "Le titre est trop long. Veuillez le limiter à 100 caractères."
-    }
-  },
-  "task": {
-    "placeholder": "Entrez une tâche...",
-    "error": {
-      "placeholderEmpty": "La tâche ne peut pas être vide.",
-      "placeholderTitleTooLong": "La description de la tâche est trop longue. Veuillez être concis."
-    }
-  },
-  "login": {
-    "rememberME": "Se souvenir de moi",
-    "loginButton": "CONNEXION",
-    "email": "E-mail",
-    "password": "Mot de passe",
-    "emailInput": "Entrez votre adresse e-mail",
-    "passwordInput": "Entrez votre mot de passe",
-    "error": {
-      "email": "Veuillez entrer une adresse e-mail valide.",
-      "password": "Mot de passe requis.",
-      "emailReq": "Veuillez entrer votre adresse e-mail.",
-      "passwordReq": "Veuillez entrer votre mot de passe."
-    },
-    "logout": "SE DÉCONNECTER"
-  },
+  "WeatherVue": { "Title": "Bienvenue sur WeatherVue" },
   "languageSelector": {
-    "english": "🇬🇧 Anglais",
-    "russian": "🇷🇺 Russe",
-    "german": "🇩🇪 Allemand",
-    "spanish": "🇪🇸 Espagnol",
-    "french": "🇫🇷 Français",
-    "italian": "🇮🇹 Italien",
-    "japanese": "🇯🇵 Japonais",
-    "korean": "🇰🇷 Coréen",
-    "dutch": "🇳🇱 Néerlandais",
-    "polish": "🇵🇱 Polonais",
-    "portuguese": "🇵🇹 Portugais",
-    "swedish": "🇸🇪 Suédois",
-    "turkish": "🇹🇷 Turc",
-    "chinese": "🇨🇳 Chinois",
-    "arabic": "🇦🇪 Arabe"
+    "en": "🇬🇧 Anglais",
+    "ru": "🇷🇺 Russe",
+    "de": "🇩🇪 Allemand",
+    "es": "🇪🇸 Espagnol",
+    "fr": "🇫🇷 Français",
+    "it": "🇮🇹 Italien",
+    "jp": "🇯🇵 Japonais",
+    "kr": "🇰🇷 Coréen",
+    "nl": "🇳🇱 Néerlandais",
+    "pl": "🇵🇱 Polonais",
+    "pt": "🇵🇹 Portugais",
+    "se": "🇸🇪 Suédois",
+    "tr": "🇹🇷 Turc",
+    "ch": "🇨🇳 Chinois",
+    "ae": "🇦🇪 Arabe"
   }
 }

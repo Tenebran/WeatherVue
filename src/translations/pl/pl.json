@@ -1,53 +1,20 @@
 {
-  "todolist": {
-    "placeholder": "Wprowadź tytuł listy rzeczy do zrobienia...",
-    "error": {
-      "placeholderEmpty": "Tytuł nie może być pusty.",
-      "placeholderTitleTooLong": "Tytuł jest zbyt długi. Utrzymaj go poniżej 100 znaków."
-    },
-    "filter": {
-      "all": "Wszystkie",
-      "active": "Aktywne",
-      "completed": "Zakończone"
-    }
-  },
-  "task": {
-    "placeholder": "Wprowadź zadanie...",
-    "error": {
-      "placeholderEmpty": "Zadanie nie może być puste.",
-      "placeholderTitleTooLong": "Opis zadania jest zbyt długi. Proszę go skrócić."
-    }
-  },
-  "login": {
-    "rememberME": "Zapamiętaj mnie",
-    "loginButton": "ZALOGUJ SIĘ",
-    "email": "E-mail",
-    "password": "Hasło",
-    "emailInput": "Wprowadź swój adres e-mail",
-    "passwordInput": "Wprowadź swoje hasło",
-    "error": {
-      "email": "Proszę podać poprawny adres e-mail.",
-      "password": "Hasło jest wymagane.",
-      "emailReq": "Wprowadź swój adres e-mail.",
-      "passwordReq": "Wprowadź swoje hasło."
-    },
-    "logout": "WYLOGUJ SIĘ"
-  },
+  "WeatherVue": { "Title": "Witaj w WeatherVue" },
   "languageSelector": {
-    "english": "🇬🇧 Angielski",
-    "russian": "🇷🇺 Rosyjski",
-    "german": "🇩🇪 Niemiecki",
-    "spanish": "🇪🇸 Hiszpański",
-    "french": "🇫🇷 Francuski",
-    "italian": "🇮🇹 Włoski",
-    "japanese": "🇯🇵 Japoński",
-    "korean": "🇰🇷 Koreański",
-    "dutch": "🇳🇱 Niderlandzki",
-    "polish": "🇵🇱 Polski",
-    "portuguese": "🇵🇹 Portugalski",
-    "swedish": "🇸🇪 Szwedzki",
-    "turkish": "🇹🇷 Turecki",
-    "chinese": "🇨🇳 Chiński",
-    "arabic": "🇦🇪 Arabski"
+    "en": "🇬🇧 Angielski",
+    "ru": "🇷🇺 Rosyjski",
+    "de": "🇩🇪 Niemiecki",
+    "es": "🇪🇸 Hiszpański",
+    "fr": "🇫🇷 Francuski",
+    "it": "🇮🇹 Włoski",
+    "jp": "🇯🇵 Japoński",
+    "kr": "🇰🇷 Koreański",
+    "nl": "🇳🇱 Niderlandzki",
+    "pl": "🇵🇱 Polski",
+    "pt": "🇵🇹 Portugalski",
+    "se": "🇸🇪 Szwedzki",
+    "tr": "🇹🇷 Turecki",
+    "ch": "🇨🇳 Chiński",
+    "ae": "🇦🇪 Arabski"
   }
 }

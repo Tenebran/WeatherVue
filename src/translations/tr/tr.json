@@ -1,53 +1,20 @@
 {
-  "todolist": {
-    "placeholder": "Yapılacaklar listeniz için bir başlık girin...",
-    "error": {
-      "placeholderEmpty": "Başlık boş bırakılamaz.",
-      "placeholderTitleTooLong": "Başlık çok uzun. Lütfen 100 karakterin altında tutun."
-    },
-    "filter": {
-      "all": "Tümü",
-      "active": "Aktif",
-      "completed": "Tamamlanan"
-    }
-  },
-  "task": {
-    "placeholder": "Bir görev girin...",
-    "error": {
-      "placeholderEmpty": "Görev boş bırakılamaz.",
-      "placeholderTitleTooLong": "Görev açıklaması çok uzun. Lütfen kısa tutun."
-    }
-  },
-  "login": {
-    "rememberME": "Beni hatırla",
-    "loginButton": "GİRİŞ YAP",
-    "email": "E-posta",
-    "password": "Şifre",
-    "emailInput": "E-posta adresinizi girin",
-    "passwordInput": "Şifrenizi girin",
-    "error": {
-      "email": "Lütfen geçerli bir e-posta adresi girin.",
-      "password": "Şifre gereklidir.",
-      "emailReq": "Lütfen e-posta adresinizi girin.",
-      "passwordReq": "Lütfen şifrenizi girin."
-    },
-    "logout": "ÇIKIŞ YAP"
-  },
+  "WeatherVue": { "Title": "WeatherVue'ye Hoş Geldiniz" },
   "languageSelector": {
-    "english": "🇬🇧 İngilizce",
-    "russian": "🇷🇺 Rusça",
-    "german": "🇩🇪 Almanca",
-    "spanish": "🇪🇸 İspanyolca",
-    "french": "🇫🇷 Fransızca",
-    "italian": "🇮🇹 İtalyanca",
-    "japanese": "🇯🇵 Japonca",
-    "korean": "🇰🇷 Korece",
-    "dutch": "🇳🇱 Hollandaca",
-    "polish": "🇵🇱 Lehçe",
-    "portuguese": "🇵🇹 Portekizce",
-    "swedish": "🇸🇪 İsveççe",
-    "turkish": "🇹🇷 Türkçe",
-    "chinese": "🇨🇳 Çince",
-    "arabic": "🇦🇪 Arapça"
+    "en": "🇬🇧 İngilizce",
+    "ru": "🇷🇺 Rusça",
+    "de": "🇩🇪 Almanca",
+    "es": "🇪🇸 İspanyolca",
+    "fr": "🇫🇷 Fransızca",
+    "it": "🇮🇹 İtalyanca",
+    "jp": "🇯🇵 Japonca",
+    "kr": "🇰🇷 Korece",
+    "nl": "🇳🇱 Hollandaca",
+    "pl": "🇵🇱 Lehçe",
+    "pt": "🇵🇹 Portekizce",
+    "se": "🇸🇪 İsveççe",
+    "tr": "🇹🇷 Türkçe",
+    "ch": "🇨🇳 Çince",
+    "ae": "🇦🇪 Arapça"
   }
 }

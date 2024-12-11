@@ -49,11 +49,11 @@
 
 <script setup lang="ts">
 import { CurrentWeatherType } from '../hooks/useCurrentWeather';
-
 defineProps<{
   currentWeather: CurrentWeatherType;
   isLoading: boolean;
 }>();
+
 </script>
 
 <style scoped lang="scss">

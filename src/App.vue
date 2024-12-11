@@ -13,7 +13,6 @@ const networkError = ref();
 const { currentWeather, getCurrentWeather } = useCurrentWeather();
 const { forecast, getForecast } = useForecast();
 const isLoading = ref(false);
-
 const getWeather = () => {
   isLoading.value = true;
   if (city.value.trim().length < 2) {
@@ -34,6 +33,7 @@ const getWeather = () => {
   }
 };
 
+
 city.value && getWeather();
 </script>
 
@@ -52,7 +52,6 @@ city.value && getWeather();
         <span>Discover the current weather in </span>
       </template>
       <span class="weather_font_subtitle"> {{ city ? city : 'you City' }}</span>
-      <!-- <Select></Select> -->
       <AddItemForm v-model:city="city" :errorMessage="errorMessage" :getWeather="getWeather" />
 
       <div v-if="isLoading" class="d-flex justify-center loading-spinner">
