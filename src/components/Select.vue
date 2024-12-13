@@ -44,6 +44,7 @@ import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   getWeather: () => void;
+  city: string;
 }>();
 
 type LanguagesType = { code: string; flag: string; label: string };
@@ -83,7 +84,7 @@ const changeLanguage = (lang: LanguagesType) => {
   locale.value = lang.code;
   localStorage.setItem('lang', lang.code);
   currentLanguage.value = lang;
-  props.getWeather();
+  props.city.length > 2 && props.getWeather();
 };
 </script>
 
