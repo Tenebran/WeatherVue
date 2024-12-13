@@ -141,6 +141,7 @@ city.value && getWeather();
       }
     }
     &_font {
+      font-size: 17px;
       &_subtitle {
         min-width: 90vw;
       }
