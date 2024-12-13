@@ -54,7 +54,10 @@ city.value && getWeather();
         <span>{{ t('WeatherVue.Subtitle') }}</span>
       </template>
       <span class="weather_font_subtitle"> {{ city ? city : t('WeatherVue.youcity') }}</span>
-      <AddItemForm v-model:city="city" :errorMessage="errorMessage" :getWeather="getWeather" />
+      <AddItemForm
+        v-model:city="city"
+        v-model:errorMessage="errorMessage"
+        :getWeather="getWeather" />
 
       <div v-if="isLoading" class="d-flex justify-center loading-spinner">
         <v-progress-circular indeterminate color="primary" size="48"></v-progress-circular>
@@ -141,6 +144,7 @@ city.value && getWeather();
       }
     }
     &_font {
+      font-size: 17px;
       &_subtitle {
         min-width: 90vw;
       }
